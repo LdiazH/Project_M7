@@ -3,7 +3,7 @@
      <v-col >
         <v-card width="400">
           <v-img
-            height="300px"
+            height="400px"
             :src="cursoImagen">  
           </v-img>
           <v-card-text>

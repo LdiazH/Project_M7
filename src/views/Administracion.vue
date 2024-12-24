@@ -14,7 +14,7 @@
       <th scope="col">Costo</th>
       <th scope="col">Terminado</th>
       <th scope="col">Fechas</th>
-      <th scope="col">acciones</th>
+      <th scope="col">Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -52,13 +52,15 @@
   </tbody>
 </v-simple-table>
 </div>
-    <v-row class="d-flex flex-column align-center my-5">
-      <p class="border w-75" id="cupos">Cantidad total de alumnos permitidos: {{ totalCupos }}</p>
-      <p class="border w-75" id="inscritos">Cantidad total de alumnos inscritos: {{ totalInscritos }}</p>
-      <p class="border w-75" id="restantes">Cantidad total de cupos restantes: {{ totalCuposRestantes }}</p>
-      <p class="border w-75" id="restantes">Cantidad total de cursos terminados: {{ totalCursosTerminados }}</p>
-      <p class="border w-75" id="activos">Cantidad total de cursos activos: {{ totalCursosActivos }}</p>
-      <p class="border w-75" id="totalCursos">Cantidad total de cursos: {{ totalCursos }}</p>
+    <v-row >
+      <v-col class=" d-flex flex-column align-center my-5 teal lighten-4">
+        <p class="border w-75 " id="cupos">Cantidad total de alumnos permitidos: {{ totalCupos }}</p>
+        <p class="border w-75" id="inscritos">Cantidad total de alumnos inscritos: {{ totalInscritos }}</p>
+        <p class="border w-75" id="restantes">Cantidad total de cupos restantes: {{ totalCuposRestantes }}</p>
+        <p class="border w-75" id="terminados">Cantidad total de cursos terminados: {{ totalCursosTerminados }}</p>
+        <p class="border w-75" id="activos">Cantidad total de cursos activos: {{ totalCursosActivos }}</p>
+        <p class="border w-75" id="totalCursos">Cantidad total de cursos: {{ totalCursos }}</p>
+      </v-col>
     </v-row>
     
 <v-dialog
@@ -83,7 +85,6 @@
           <v-btn
             color="error"
             text
-
             @click="borrar(selectedId)"
           >
             Eliminar
@@ -123,55 +124,36 @@ export default {
     },
 
     eliminar(index){
-      alert('eliminar'+index)
       this.selectedId = index
       this.dialog = true
 
     },
 
     borrar(idCourse){
-      
       this.eliminarCurso(idCourse);
       this.dialog = false
     },
 
     terminado(status){
-      if(status == true){
+      let myStatus = !!status
+      console.log(status)
+      if(myStatus ){
         return "si"
-      }else{
+      }else {
         return "no"
       }
 
     },
     getColor(status){
-      if(status==true){
+      let myStatus = !!status
+      if(myStatus){
         return "info"
       } else{
         return "default"
       }
 
     }
-    
-    
-    // modal(){
-    // const myModal = document.getElementById('myModal')
-    // const myInput = document.getElementById('myInput')
-
-    // myModal.addEventListener('shown.bs.modal', () => {
-    // myInput.focus()
-    // })
-    // },
-    // openModal(id) {
-    //         this.selectedId = id;
-    //         this.showModal = true;
-    //         alert(id)
-    //     },
-    // closeModal() {
-    //         this.showModal = false;
-    //         this.selectedId = null;
-    // },
         
-    
   },
   // watch: {},
   components: {
@@ -198,6 +180,10 @@ export default {
 #restantes{
   color: orangered;
 
+}
+
+#terminados{
+  color: rgb(43, 226, 107);
 }
 
 #activos{

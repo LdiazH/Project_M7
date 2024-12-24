@@ -1,9 +1,11 @@
 <template>
     <v-container>
-        <h1> Editar curso {{ this.id }}</h1>
+        <v-row class="d-flex justify-center my-5" >
+            <h1 > Editar curso {{ this.id }}</h1>
+        </v-row>
         <v-row class="d-flex justify-center" >
             <v-col cols="12" md="8">
-            <v-form action="" class="d-flex  flex-column" > 
+            <v-form action="" class="d-flex  flex-column cyan lighten-4 pa-4" > 
                 <v-text-field
                 v-model="courseToEdit.nombre"
                 label="Nombre"
@@ -34,11 +36,17 @@
                 label="Fecha de registro"
                 required
                 ></v-text-field>
-                <v-text-field
+                <!-- <v-text-field
                 v-model="courseToEdit.completado"
                 label="Terminado"
                 required
-                ></v-text-field>
+                ></v-text-field> -->
+                <v-select
+                :items="[true,false]"
+                label="Completado"
+                v-model="courseToEdit.completado"
+                >
+                </v-select>
                 <v-text-field
                 v-model="courseToEdit.costo"
                 label="Costo"
@@ -79,6 +87,12 @@ export default {
         id(){
             return this.$route.params.id
         },
+    // boolean(){
+    //     if(this.courseToEdit.finish === true){
+    //         return true
+    //     }
+    //     return false
+    // }
     },
     methods: {
         ...mapActions(['guardarCambios']),
@@ -87,13 +101,14 @@ export default {
             return this.courseToEdit = index
         },
         agregar(index){
-            alert(index)
-            
+            console.log( !!this.courseToEdit.completado)
+            console.log(typeof !!this.courseToEdit.completado)
             let newEditCourse = {
                 
                 img: this.courseToEdit.img,
                 nombre: this.courseToEdit.nombre,
                 costo: parseInt(this.courseToEdit.costo),
+                completado: !!this.courseToEdit.completado,
                 duracion: this.courseToEdit.duracion,
                 cupos: parseInt(this.courseToEdit.cupos),
                 inscritos: parseInt(this.courseToEdit.inscritos),
