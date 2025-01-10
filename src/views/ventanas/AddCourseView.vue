@@ -89,7 +89,7 @@ export default {
             nameRules: [
             v => !!v || 'Name is required',
             v => (v && v.length <= 15 ) || 'Name must be less than 15 characters',
-            v => /^[A-Za-z]+$/.test(v) || 'Only letters'
+            v => /^[A-Za-z\s]+$/g.test(v) || 'Only letters'
             ],
             url: "",
             urlRules:[
